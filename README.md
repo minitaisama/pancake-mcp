@@ -124,11 +124,12 @@ pancake-mcp export-schemas ~/.gemini/antigravity/mcp/pancake
 
 ---
 
-## Included Agent Skill
+## Included Agent Skill (`pancake`)
 
-The repository includes a ready-to-use agent skill in [`skills/pancake-mcp/`](./skills/pancake-mcp/):
-- [`skills/pancake-mcp/SKILL.md`](./skills/pancake-mcp/SKILL.md) — Architecture cheat-sheet, 4-pillar Auto Pilot rules, Send Policy v2, Order/Payment Bill Vision rules, Outreach R0–R2/Z1 gates, and MCP tool routing.
-- [`skills/pancake-mcp/references/playbooks.md`](./skills/pancake-mcp/references/playbooks.md) — Step-by-step troubleshooting playbooks.
+The repository includes a ready-to-use agent skill in [`skills/pancake/`](./skills/pancake/):
+- [`skills/pancake/SKILL.md`](./skills/pancake/SKILL.md) — Architecture cheat-sheet, 4-pillar Auto Pilot rules, Send Policy v2, Order/Payment Bill Vision rules, Outreach R0–R2/Z1 gates, and MCP tool routing.
+- [`skills/pancake/references/playbooks.md`](./skills/pancake/references/playbooks.md) — Step-by-step troubleshooting playbooks.
+- [`skills/pancake/agents/openai.yaml`](./skills/pancake/agents/openai.yaml) — Multi-agent skill interface metadata.
 
 ---
 

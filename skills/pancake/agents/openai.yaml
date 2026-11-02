@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pancake & Chat Diagnostics"
+  short_description: "Troubleshoot hội thoại Pancake (pancake.vn / pages.fm), bot replies, đơn hàng, và Outreach"
+  default_prompt: "Dùng $pancake để kiểm tra và chẩn đoán nguyên nhân sự cố hội thoại Pancake này."

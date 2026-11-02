@@ -1,9 +1,9 @@
 ---
-name: pancake-mcp
+name: pancake
 description: Unified Pancake (pancake.vn / pages.fm) & VietLicense Chat troubleshooting, message/attachment/log/decision inspection, direct Pancake Public API v1/v2 inspection, and guarded operational actions. Activate this skill whenever the user mentions Pancake, pages.fm, a Pancake link (c_id=...), chat troubleshooting, bot replies (Auto Pilot, Chatbot 2.0, Ads Preset, Auto Comment, Price Commands), Outreach (R0, R0 Video, Z1, R1, R2), Create Order / payment bill confirmation, or Zalo QR tagging.
 ---
 
-# Pancake MCP & Chat Troubleshooting (`pancake-mcp`)
+# Pancake & Chat Troubleshooting (`pancake`)
 
 This skill provides a 1-to-2-call workflow for diagnosing and operating **Pancake (`pancake.vn` / `pages.fm`)** and **VietLicense Chat (`chat.vietlicense.org`)** across both **Facebook Page (`facebook_vietlicense`, page `1131614906706493`)** and **Zalo Personal (`zalo_thanh`, page `pzl_2129315222293162170`)**.
 
@@ -11,7 +11,7 @@ This skill provides a 1-to-2-call workflow for diagnosing and operating **Pancak
 
 ## 1. Golden Rules
 
-1. **One-Call Diagnosis First (`pancake_diagnose_incident`)**:
+1. **One-Call Diagnosis First (`pancake_diagnose_incident` / `pancake-mcp diagnose`)**:
    - Whenever the user gives a Pancake URL (`https://pancake.vn/...?c_id=...`), a Pancake conversation ID (`PAGEID_PSID`, `POSTID_COMMENTID`, `pzl_u_...`), a local UUID, a message ID (`m_...`), or an Admin Order ID, call `pancake_diagnose_incident` (or CLI `pancake-mcp diagnose "<target>"`) **first**.
    - In a single round-trip, it returns:
      - **Ops v2 Pipeline Stage Diagnosis** (`firstBrokenStage`, root cause explanation, recommended next checks)
@@ -22,7 +22,7 @@ This skill provides a 1-to-2-call workflow for diagnosing and operating **Pancak
    - If you suspect a customer message, payment receipt image, Zalo QR image, POS order card, or tag exists on Pancake but was not ingested or parsed by the bot, call `pancake_inspect_messages` with `source: "both"` (or CLI `pancake-mcp messages "<target>" --source both`).
    - Direct Pancake API calls automatically handle Pancake's quirks:
      - **Single-conversation `/v2` HTML quirk**: Automatically falls back to a bounded `/v2/pages/:id/conversations` collection scan when `/v2/pages/:id/conversations/:convId` returns the HTML SPA shell.
-     - **POS Order Card & `error_code=120` quirk**: Calls `/v1/pages/:id/conversations/:convId/messages` with `user_view=true&is_new_api=true&separate_pos=true&customer_id=<psid>` so POS order cards and attachments are visible, and automatically falls back to public view if `error_code=120` is returned on Facebook comment threads.
+     - **POS Order Card & `error_code=120` quirk**: Distinguishes internal Pancake customer UUIDs from Facebook PSIDs on `/v1/pages/:id/conversations/:convId/messages` and automatically falls back between `user_view=true` (POS cards) and public view on comment threads.
 3. **Read-Only by Default — Never Blindly Retry**:
    - Never blindly resend a message in `delivery_unknown` state.
    - All mutation tools (`pancake_tags` with `action: "add"`, `pancake_replay_comment_lead`, `pancake_send_test_message`) require explicit confirmation flags (`confirmMutation: true`, `confirmReplay: true`, `confirmSend: true`).
@@ -30,12 +30,12 @@ This skill provides a 1-to-2-call workflow for diagnosing and operating **Pancak
 
 ---
 
-## 2. MCP Tools Reference (`ServerName: "pancake"`)
+## 2. MCP Tools (`ServerName: "pancake"`) & CLI (`pancake-mcp`)
 
-Call these tools via `call_mcp_tool` with `ServerName: "pancake"`, or via the `pancake-mcp` CLI:
+Every agent can either call the MCP server `pancake` or invoke the global CLI `/Users/agent0/.local/bin/pancake-mcp`:
 
-| MCP Tool | CLI Equivalent | Purpose |
-|----------|----------------|---------|
+| MCP Tool (`ServerName: "pancake"`) | CLI Command (`pancake-mcp`) | Purpose |
+|------------------------------------|-----------------------------|---------|
 | `pancake_status` | `pancake-mcp status` | Verify Ops API token, Facebook Page token, Zalo token, and live runtime health |
 | `pancake_diagnose_incident` | `pancake-mcp diagnose <target> [--raw-provider]` | **Primary tool**: v2 stage diagnosis + DB messages + `bot_audit_logs` + `chatbot2_decisions` (+ optional raw Pancake messages) |
 | `pancake_inspect_messages` | `pancake-mcp messages <target> --source both` | Side-by-side DB messages/logs/decisions and live Pancake provider messages/attachments/phone metadata |
