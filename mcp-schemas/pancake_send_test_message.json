@@ -1,0 +1,45 @@
+{
+  "name": "pancake_send_test_message",
+  "description": "Send an authorized test message and/or image to a Pancake conversation (e.g. user test thread). Never use to blindly retry a delivery_unknown message. Requires confirmSend=true.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Pancake conversation URL or ID (e.g. 1131614906706493_27102859622703796)"
+      },
+      "message": {
+        "type": "string",
+        "description": "Text message content to send"
+      },
+      "imagePath": {
+        "type": "string",
+        "description": "Optional local file path to an image (.png/.jpg/.webp) to upload and send"
+      },
+      "contentIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Optional pre-uploaded Pancake attachment content_ids"
+      },
+      "connectorKey": {
+        "type": "string",
+        "enum": [
+          "facebook_vietlicense",
+          "zalo_thanh"
+        ],
+        "description": "Optional explicit connector key"
+      },
+      "confirmSend": {
+        "type": "boolean",
+        "description": "Must be true to authorize sending a real message to Pancake"
+      }
+    },
+    "required": [
+      "target",
+      "confirmSend"
+    ],
+    "additionalProperties": false
+  }
+}

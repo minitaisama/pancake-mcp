@@ -1,0 +1,41 @@
+{
+  "name": "pancake_tags",
+  "description": "List all tags configured on the Pancake page, or add/toggle a tag on a specific conversation (requires confirmMutation=true).",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": [
+          "list",
+          "add"
+        ],
+        "description": "'list' page tags (read-only) or 'add' a tag to a conversation (mutation)"
+      },
+      "connectorKey": {
+        "type": "string",
+        "enum": [
+          "facebook_vietlicense",
+          "zalo_thanh"
+        ],
+        "description": "Connector key (default: facebook_vietlicense)"
+      },
+      "target": {
+        "type": "string",
+        "description": "Pancake conversation URL or ID (required when action='add')"
+      },
+      "tagNameOrId": {
+        "type": "string",
+        "description": "Tag display name (e.g. 'QR Zalo', 'Doanh nghiệp') or tag ID (required when action='add')"
+      },
+      "confirmMutation": {
+        "type": "boolean",
+        "description": "Must be true when action='add'"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "additionalProperties": false
+  }
+}

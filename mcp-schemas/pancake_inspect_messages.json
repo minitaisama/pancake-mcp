@@ -1,0 +1,63 @@
+{
+  "name": "pancake_inspect_messages",
+  "description": "Inspect conversation messages, Chatbot 2.0 decisions, bot_audit_logs, tags, latest order push, and/or raw Pancake provider messages & attachment URLs (payment bills, Zalo QR codes, POS order cards, phone numbers). Read-only.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Any target reference: Pancake URL (https://pancake.vn/...?c_id=...), Pancake conversation ID (PAGEID_PSID, POSTID_COMMENTID, pzl_u_...), local UUID, message ID (m_...), or Admin Order ID"
+      },
+      "pancakeUrl": {
+        "type": "string",
+        "description": "Pancake conversation URL (https://pancake.vn/...?c_id=...)"
+      },
+      "pancakeConversationId": {
+        "type": "string",
+        "description": "Exact Pancake conversation ID (e.g. 1131614906706493_27102859622703796)"
+      },
+      "conversationId": {
+        "type": "string",
+        "description": "Local database conversation UUID"
+      },
+      "messageId": {
+        "type": "string",
+        "description": "Exact Pancake message/comment ID"
+      },
+      "deliveryId": {
+        "type": "string",
+        "description": "Outbound delivery UUID"
+      },
+      "orderId": {
+        "type": "string",
+        "description": "VietLicense Admin Order ID or local order push UUID"
+      },
+      "source": {
+        "type": "string",
+        "enum": [
+          "both",
+          "db",
+          "provider"
+        ],
+        "description": "Where to read messages from: 'db' (Admin/Ops DB), 'provider' (direct Pancake API), or 'both' (default: 'both')"
+      },
+      "connectorKey": {
+        "type": "string",
+        "enum": [
+          "facebook_vietlicense",
+          "zalo_thanh"
+        ],
+        "description": "Optional explicit connector key when reading from provider"
+      },
+      "limit": {
+        "type": "number",
+        "description": "Max messages to return (default: 30, max: 150)"
+      },
+      "includeRawProviderPayload": {
+        "type": "boolean",
+        "description": "Include raw Pancake message JSON objects for deep attachment/POS debugging (default: false)"
+      }
+    },
+    "additionalProperties": false
+  }
+}

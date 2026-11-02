@@ -1,0 +1,34 @@
+{
+  "name": "pancake_replay_comment_lead",
+  "description": "Safely replay a missed purchase comment lead via POST /api/admin/conversations/:id/replay-comment-lead (sends public comment ack + private inbox opener and records audit log). Requires confirmReplay=true.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Pancake comment conversation URL, Pancake ID (POSTID_COMMENTID), or local UUID"
+      },
+      "postId": {
+        "type": "string",
+        "description": "Optional explicit Facebook post ID (PAGEID_POSTID) override"
+      },
+      "messageId": {
+        "type": "string",
+        "description": "Optional explicit comment message ID override"
+      },
+      "fromId": {
+        "type": "string",
+        "description": "Optional explicit commenter PSID override"
+      },
+      "confirmReplay": {
+        "type": "boolean",
+        "description": "Must be set to true to authorize sending the comment lead reply"
+      }
+    },
+    "required": [
+      "target",
+      "confirmReplay"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "pancake_search_conversations",
+  "description": "Search or list conversations either in the local database (by query, tag, connectorKey) or directly from the Pancake v2 API (INBOX/COMMENT, unread_first, tags). Read-only.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "source": {
+        "type": "string",
+        "enum": [
+          "db",
+          "provider"
+        ],
+        "description": "Search in local 'db' (/api/admin/conversations) or direct 'provider' (Pancake v2 API). Default: 'db'"
+      },
+      "q": {
+        "type": "string",
+        "description": "Search query (customer name, phone, or conversation ID) when source='db'"
+      },
+      "tag": {
+        "type": "string",
+        "description": "Filter by conversation tag (e.g. 'Doanh nghiệp', 'QR Zalo', 'Cá nhân')"
+      },
+      "connectorKey": {
+        "type": "string",
+        "enum": [
+          "facebook_vietlicense",
+          "zalo_thanh"
+        ],
+        "description": "Connector key (default: facebook_vietlicense)"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "INBOX",
+          "COMMENT"
+        ],
+        "description": "Conversation surface when source='provider' (default: INBOX)"
+      },
+      "unreadFirst": {
+        "type": "boolean",
+        "description": "Prioritize unread conversations when source='provider'"
+      },
+      "lookbackDays": {
+        "type": "number",
+        "description": "Lookback window in days when source='provider' (default: 7)"
+      },
+      "limit": {
+        "type": "number",
+        "description": "Maximum conversations to return (default: 20, max: 100)"
+      }
+    },
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "pancake-mcp",
+  "version": "1.0.0",
+  "description": "MCP server, CLI & Antigravity skill for Pancake (pages.fm / pancake.vn) conversation diagnostics, pipeline tracing, and multi-connector operations",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "pancake-mcp": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "cli": "node dist/cli.js",
+    "test": "node --test dist/tests/*.test.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "pancake",
+    "pages-fm",
+    "chatbot-diagnostics",
+    "troubleshooting",
+    "antigravity-skill"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "typescript": "^5.7.3"
+  }
+}

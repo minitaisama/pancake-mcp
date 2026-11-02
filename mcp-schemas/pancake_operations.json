@@ -1,0 +1,44 @@
+{
+  "name": "pancake_operations",
+  "description": "Check system-wide operations & reliability status: ingest cursors, interactive/delivery queues, outreach step backlogs & SLA analytics (24h/7d/30d), discovery SLA, governor lane contention, bulk campaigns, and runtime settings. Read-only.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "section": {
+        "type": "string",
+        "enum": [
+          "runtime",
+          "queues",
+          "outreach",
+          "reliability",
+          "bulk",
+          "settings",
+          "all"
+        ],
+        "description": "Operations v2 section to inspect (default: all)"
+      },
+      "includeOverviewV1": {
+        "type": "boolean",
+        "description": "Also include v1 overview with stage latencies and governor lane wait telemetry (default: false)"
+      },
+      "windowMinutes": {
+        "type": "number",
+        "description": "Aggregate window in minutes (default: 60, range: 5-43200)"
+      },
+      "analyticsWindow": {
+        "type": "string",
+        "enum": [
+          "24h",
+          "7d",
+          "30d"
+        ],
+        "description": "Outreach delivery analytics window (default: 24h)"
+      },
+      "campaignId": {
+        "type": "string",
+        "description": "Optional bulk campaign UUID when section='bulk'"
+      }
+    },
+    "additionalProperties": false
+  }
+}

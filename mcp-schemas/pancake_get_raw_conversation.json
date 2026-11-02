@@ -1,0 +1,41 @@
+{
+  "name": "pancake_get_raw_conversation",
+  "description": "Fetch a conversation's raw metadata and messages directly from the Pancake Public API (with automatic collection-scan fallback when Pancake's single-conversation v2 endpoint returns HTML). Read-only.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Pancake URL or Pancake conversation ID (e.g. 1131614906706493_27102859622703796)"
+      },
+      "connectorKey": {
+        "type": "string",
+        "enum": [
+          "facebook_vietlicense",
+          "zalo_thanh"
+        ],
+        "description": "Optional explicit connector key"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "INBOX",
+          "COMMENT"
+        ],
+        "description": "Conversation type hint for collection fallback (default: INBOX)"
+      },
+      "messageLimit": {
+        "type": "number",
+        "description": "Max messages to fetch (default: 30)"
+      },
+      "includeRawMessages": {
+        "type": "boolean",
+        "description": "Include raw unfiltered Pancake message objects (default: false)"
+      }
+    },
+    "required": [
+      "target"
+    ],
+    "additionalProperties": false
+  }
+}

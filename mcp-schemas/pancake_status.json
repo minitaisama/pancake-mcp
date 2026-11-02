@@ -1,0 +1,14 @@
+{
+  "name": "pancake_status",
+  "description": "Check Pancake MCP credential readiness (Ops API token, Facebook Page token, Zalo token) and live runtime/database health of the chat server.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "expectedRevision": {
+        "type": "string",
+        "description": "Optional Git SHA or source fingerprint to verify against live runtime"
+      }
+    },
+    "additionalProperties": false
+  }
+}
